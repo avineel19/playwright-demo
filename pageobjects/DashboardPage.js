@@ -24,4 +24,4 @@ class DashboardPage {
         }
     }
 }
-module.exports = {DashboardPage}
+export default() => {DashboardPage}

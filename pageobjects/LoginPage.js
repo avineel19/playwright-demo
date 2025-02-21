@@ -16,4 +16,4 @@ class LoginPage {
         await this.page.waitForLoadState('networkidle');
     }
 }
-module.exports = {LoginPage}
+export default() => {LoginPage}

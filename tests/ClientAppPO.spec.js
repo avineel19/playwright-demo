@@ -3,14 +3,15 @@ import { test, expect } from '@playwright/test';
 import { sign } from 'crypto';
 import { title } from 'process';
 import { text } from 'stream/consumers';
-const {POManager} = require('../pageobjects/POManager');
+import POManager from '../pageobjects/POManager';
+
 
 
 
 test('Browser Context-Validating Error login', async({page}) =>{
     
     var email = "a.vineel@hotmail.com";
-    const poManager = new POManager(page);
+    const poManager = new POManager(page)
     const loginPage = poManager.getLoginPage();
     await loginPage.goTo();
     await loginPage.validLogin(email,"AAbb11!!");

@@ -61,4 +61,4 @@ class CartPage {
     await this.submit.click();
     }
 }
-module.exports = {CartPage};
+export default() => {CartPage};
