@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 import { sign } from 'crypto';
 import { title } from 'process';
 import { text } from 'stream/consumers';
-import POManager from '../pageobjects/POManager';
+import {POManager} from '../pageobjects/POManager';
 
 
 
@@ -11,7 +11,7 @@ import POManager from '../pageobjects/POManager';
 test('Browser Context-Validating Error login', async({page}) =>{
     
     var email = "a.vineel@hotmail.com";
-    const poManager = new POManager(page)
+    const poManager = new POManager(page);
     const loginPage = poManager.getLoginPage();
     await loginPage.goTo();
     await loginPage.validLogin(email,"AAbb11!!");
@@ -50,7 +50,7 @@ test('Browser Context-Validating Error login', async({page}) =>{
     const myOrdersCount = await myOrders.count();
 
     for(let i=0; i<myOrdersCount; i++) {
-        if(await myOrders.nth(i).locator("[scope='row']").textContent() === refactoredOrderId) {
+        if((await myOrders.nth(i).locator("[scope='row']").textContent()) === refactoredOrderId) {
             await myOrders.nth(i).locator("text=View").click();
             break;
         }

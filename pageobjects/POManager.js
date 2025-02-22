@@ -1,8 +1,8 @@
-import { LoginPage } from "./LoginPage";
-import {CartPage} from "./CartPage";
-import {DashboardPage} from "./DashboardPage";
+import {LoginPage} from './LoginPage';
+import {DashboardPage} from './DashboardPage';
+import { CartPage } from './CartPage';
 
-class POManager {
+export class POManager {
     constructor(page) {
         this.page = page;
         this.loginPage = new LoginPage(this.page);
@@ -22,4 +22,3 @@ class POManager {
         return this.cartPage;
     }
 }
-export default()=>{POManager};

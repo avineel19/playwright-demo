@@ -1,4 +1,4 @@
-class DashboardPage {
+export class DashboardPage {
     constructor(page) {
         this.page = page;
         this.products = page.locator(".card-body");
@@ -16,7 +16,7 @@ class DashboardPage {
         //Zara Coat 4
         const count = await itemBody.count();
         for (let i = 0; i < count; i++) {
-            if (await itemBody.nth(i).locator("b").textContent() === productName) {
+            if ((await itemBody.nth(i).locator("b").textContent()) === productName) {
                 //You can find element using text=<value of Text>
                 await itemBody.nth(i).locator("text=Add To Cart").click();
                 break;
@@ -24,4 +24,3 @@ class DashboardPage {
         }
     }
 }
-export default() => {DashboardPage}

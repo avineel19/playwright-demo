@@ -30,4 +30,4 @@ class APIUtils {
         
     }
 }
-module.exports = {APIUtils};
+export default {APIUtils};

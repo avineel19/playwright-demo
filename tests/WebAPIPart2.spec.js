@@ -32,7 +32,7 @@ test.only('Browser Context-Validating Error login', async() =>{
     //Zara Coat 4
     const count = await itemBody.count();
     for(let i=0; i < count; i++) {
-        if(await itemBody.nth(i).locator("b").textContent()===targetProductName) {
+        if((await itemBody.nth(i).locator("b").textContent())===targetProductName) {
             //You can find element using text=<value of Text>
             await itemBody.nth(i).locator("text=Add To Cart").click();
             break;
@@ -99,7 +99,7 @@ test.only('Browser Context-Validating Error login', async() =>{
     const myOrdersCount = await myOrders.count();
 
     for(let i=0; i<myOrdersCount; i++) {
-        if(await myOrders.nth(i).locator("[scope='row']").textContent() === refactoredOrderId) {
+        if((await myOrders.nth(i).locator("[scope='row']").textContent()) === refactoredOrderId) {
             await myOrders.nth(i).locator("text=View").click();
             break;
         }

@@ -1,6 +1,7 @@
 import { test,expect,request } from "@playwright/test";
+
 // import {APIUtils} from "./utils/APIUtils";
-const {APIUtils} = require('./utils/APIUtils');
+import { APIUtils } from '../utils/APIUtils';
 
 
 const loginPayload = {userEmail:"a.vineel@hotmail.com", userPassword:"AAbb11!!"};
@@ -68,7 +69,7 @@ test.only("createOrder via Api", async({page})=>{
     const myOrdersCount = await myOrders.count();
 
     for(let i=0; i<myOrdersCount; i++) {
-        if(await myOrders.nth(i).locator("[scope='row']").textContent() === response.orderId) {
+        if((await myOrders.nth(i).locator("[scope='row']").textContent()) === response.orderId) {
             await myOrders.nth(i).locator("text=View").click();
             break;
         }

@@ -1,4 +1,4 @@
-class LoginPage {
+export class LoginPage {
     constructor(page) {
         this.page = page;
         this.signInButton = page.locator("[value='Login']");
@@ -16,4 +16,3 @@ class LoginPage {
         await this.page.waitForLoadState('networkidle');
     }
 }
-export default() => {LoginPage}

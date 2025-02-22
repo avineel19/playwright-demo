@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-class CartPage {
+export class CartPage {
     #waitTag;
     #hasProductText;
     #checkout;
@@ -61,4 +61,3 @@ class CartPage {
     await this.submit.click();
     }
 }
-export default() => {CartPage};
