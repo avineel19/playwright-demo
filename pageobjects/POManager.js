@@ -2,7 +2,7 @@ import {LoginPage} from './LoginPage';
 import {DashboardPage} from './DashboardPage';
 import { CartPage } from './CartPage';
 
-export class POManager {
+class POManager {
     constructor(page) {
         this.page = page;
         this.loginPage = new LoginPage(this.page);
@@ -22,3 +22,5 @@ export class POManager {
         return this.cartPage;
     }
 }
+
+export default POManager;

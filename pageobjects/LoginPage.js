@@ -1,5 +1,8 @@
+import POManager from "./POManager";
+
 export class LoginPage {
     constructor(page) {
+        const pom = new POManager(page);
         this.page = page;
         this.signInButton = page.locator("[value='Login']");
         this.userName = page.locator("#userEmail");
