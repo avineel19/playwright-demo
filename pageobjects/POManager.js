@@ -1,6 +1,6 @@
-import {LoginPage} from './LoginPage';
-import {DashboardPage} from './DashboardPage';
-import { CartPage } from './CartPage';
+import LoginPage from './LoginPage';
+import DashboardPage from './DashboardPage';
+import CartPage from './CartPage';
 
 class POManager {
     constructor(page) {

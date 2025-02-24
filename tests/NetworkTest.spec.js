@@ -1,7 +1,7 @@
 import { test,expect,request } from "@playwright/test";
 
 // import {APIUtils} from "./utils/APIUtils";
-import { APIUtils } from '../utils/APIUtils';
+import  APIUtils  from '../utils/APIUtils';
 
 
 const loginPayload = {userEmail:"a.vineel@hotmail.com", userPassword:"AAbb11!!"};

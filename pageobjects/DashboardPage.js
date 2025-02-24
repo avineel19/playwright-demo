@@ -1,4 +1,6 @@
-export class DashboardPage {
+import { hasUncaughtExceptionCaptureCallback } from "process";
+
+class DashboardPage {
     constructor(page) {
         this.page = page;
         this.products = page.locator(".card-body");
@@ -24,3 +26,5 @@ export class DashboardPage {
         }
     }
 }
+
+export default DashboardPage;

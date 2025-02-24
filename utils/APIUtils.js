@@ -30,4 +30,4 @@ class APIUtils {
         
     }
 }
-export default {APIUtils};
+export default APIUtils;

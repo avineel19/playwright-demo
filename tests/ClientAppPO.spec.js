@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 import { sign } from 'crypto';
 import { title } from 'process';
 import { text } from 'stream/consumers';
-import {POManager} from '../pageobjects/POManager';
+import POManager from '../pageobjects/POManager';
 
 
 

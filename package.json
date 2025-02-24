@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-     "test": "npx playwright test tests/WebAPIPart1.spec.js --headed"
+    "test": "npx playwright test tests/WebAPIPart1.spec.js --headed"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,6 @@
     "@types/node": "^22.12.0"
   },
   "dependencies": {
-    "exceljs":"^4.4.0"
+    "exceljs": "^4.4.0"
   }
 }

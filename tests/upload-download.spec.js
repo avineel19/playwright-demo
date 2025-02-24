@@ -1,11 +1,11 @@
 import { test,expect } from "@playwright/test";
-import { Workbook } from "exceljs";
+import  ExcelJs from "exceljs";
 // const ExcelJs = require('exceljs');
 
 async function excelReadTest(path, valueToRead, valueToChange, change) {
 
 
-    const workbook = new Workbook();
+    const workbook = ExcelJs.Workbook();
     
     let output = { row: -1, column: -1 };
     await workbook.xlsx.readFile(path);

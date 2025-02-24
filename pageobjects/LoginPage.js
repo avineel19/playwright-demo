@@ -1,6 +1,6 @@
 import POManager from "./POManager";
 
-export class LoginPage {
+class LoginPage {
     constructor(page) {
         const pom = new POManager(page);
         this.page = page;
@@ -19,3 +19,5 @@ export class LoginPage {
         await this.page.waitForLoadState('networkidle');
     }
 }
+
+export default LoginPage;
