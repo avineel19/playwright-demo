@@ -1,27 +1,30 @@
 import { expect } from "@playwright/test";
 export class CartPage {
     #waitTag;
-    #hasProductText;
     #checkout;
     constructor(page) {
         this.page = page;
         this.#waitTag = this.page.locator("div li");
-        this.#hasProductText = this.page.locator("h3:has-text('zara')");
         this.#checkout = this.page.locator("text=Checkout");
         this.country = this.page.locator("[placeholder='Select Country']");
         this.dropDownCountrys = this.page.locator(".ta-results");
         this.fields = this.page.locator(".field");
-        this.submit = this.page.locator(".action__submit")
+        this.submit = this.page.locator(".action__submit");
+        this.usernameEmail = this.page.locator(".user__name [type='text']");
 
+    }
+    async verifyProductIsDisplayed(productName) {
+        //Wait for this tag
+        await this.#waitTag.first().waitFor();
+        const bool = await this.page.locator(`h3:has-text('${productName}')`).isVisible();
+        expect(bool).toBeTruthy();
+    }
+
+    async checkout() {
+        await this.#checkout.click();
     }
 
     async selectCountry(sequencialKeysCountry, countryToSelect) {
-        //Wait for this tag
-        await this.#waitTag.first().waitFor();
-        const bool = await this.#hasProductText.isVisible();
-        expect(bool).toBeTruthy();
-
-        await this.#checkout.click();
         await this.country.pressSequentially(sequencialKeysCountry);
         const dropdown = this.dropDownCountrys;
         await dropdown.waitFor();
@@ -37,10 +40,11 @@ export class CartPage {
         }
     }
 
-    async enterCreditCardDetails() {
+    async enterCreditCardDetails(email) {
         //Enter all credit card info
     //credit card
-    
+    //Expect page location email address
+    expect(this.usernameEmail.first()).toHaveText(email);
     await this.fields.first().waitFor();
     const totalCount = await this.fields.count();
     for(let i=0; i < totalCount; i++) {
@@ -58,6 +62,10 @@ export class CartPage {
             this.fields.nth(i).locator(".input").fill("V Amara");
         } 
     }
-    await this.submit.click();
+    
+    }
+
+    async submitOrder() {
+        await this.submit.click();
     }
 }

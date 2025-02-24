@@ -1,9 +1,9 @@
 export class LoginPage {
     constructor(page) {
         this.page = page;
-        this.signInButton = page.locator("[value='Login']");
-        this.userName = page.locator("#userEmail");
-        this.password = page.locator("#userPassword");
+        this.signInButton = this.page.locator("[value='Login']");
+        this.userName = this.page.locator("#userEmail");
+        this.password = this.page.locator("#userPassword");
     }
 
     async goTo() {

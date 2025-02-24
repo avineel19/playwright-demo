@@ -26,37 +26,25 @@ test('Browser Context-Validating Error login', async({page}) =>{
     await dashBoardPage.navigateToCart();
     
     const cartPage = poManager.getCartPage();
+    await cartPage.verifyProductIsDisplayed(targetProductName)
+    await cartPage.checkout();
     await cartPage.selectCountry("King", ' United Kingdom');
-    //Expect page location email address
-    expect(page.locator(".user__name [type='text']").first()).toHaveText(email);
+    
+    
     //Enter all credit card info
     //credit card
-    cartPage.enterCreditCardDetails();
+    await cartPage.enterCreditCardDetails(email);
+    await cartPage.submitOrder();
     
-    await expect(page.locator(".hero-primary")).toHaveText(" Thankyou for the order. ");
-    const orderId = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
-    await expect(orderId).not.toBe(undefined);
-    const refactoredOrderId = orderId?.replaceAll("|","").replaceAll(" ","");
-    console.log(refactoredOrderId);
-    await expect(refactoredOrderId).not.toBeNull();
+    const validateOrderDetailsPage = poManager.getValidateOrderDetailsPage();
+    const orderId = await validateOrderDetailsPage.validateOrderPageExtractOrderId();
     // await expect(refactoredOrderId).not.toBe(undefined);
     //view order
-    await page.locator("button[routerLink*='myorders']").click();
+    await validateOrderDetailsPage.clickMyOrders();
 
+    const myordersPage = poManager.getMyOrdersPage();
+    await myordersPage.findMyOrder(orderId);
 
-    //
-    await page.locator("tbody .ng-star-inserted").first().waitFor();
-    const myOrders =  page.locator("tbody .ng-star-inserted");
-    const myOrdersCount = await myOrders.count();
-
-    for(let i=0; i<myOrdersCount; i++) {
-        if((await myOrders.nth(i).locator("[scope='row']").textContent()) === refactoredOrderId) {
-            await myOrders.nth(i).locator("text=View").click();
-            break;
-        }
-    }
-
-    await page.locator(".tagline").waitFor();
-    expect(page.locator(".tagline")).toHaveText("Thank you for Shopping With Us");
+    await myordersPage.viewOrderDetails();
 
 });
