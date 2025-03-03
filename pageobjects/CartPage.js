@@ -25,6 +25,7 @@ export class CartPage {
     }
 
     async selectCountry(sequencialKeysCountry, countryToSelect) {
+        this.country.click({button:'right'});
         await this.country.pressSequentially(sequencialKeysCountry);
         const dropdown = this.dropDownCountrys;
         await dropdown.waitFor();

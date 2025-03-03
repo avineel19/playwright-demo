@@ -1,20 +1,21 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 import { sign } from 'crypto';
+import { ValidationError } from '../utils/errors/ValidationError';
 
-test('First Test', async ({browser})=>{
+test('First Test', async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto("https://rahulshettyacademy.com/loginpagePractise")
 });
 
-test('Chrome Browser Test', async ({page})=>{
+test('Chrome Browser Test', async ({ page }) => {
     await page.goto("https://rahulshettyacademy.com/loginpagePractise");
     console.log(await page.title());
     await expect(page).toHaveTitle("LoginPage Practise | Rahul Shetty Academy");
 });
 
-test('Login - Fill Form', async({page})=>{
+test('Login - Fill Form', async ({ page }) => {
     const userName = page.locator('#username');
     const passwordTextbox = page.locator("[type='password']");
     const tossMsg = page.locator("[style*='block']");
@@ -62,7 +63,7 @@ test('Login - Fill Form', async({page})=>{
 //     await signIn.click();
 // });
 
-test('UI Controls', async({page})=>{
+test('UI Controls', async ({ page }) => {
     await page.goto("https://rahulshettyacademy.com/loginpagePractise");
     const userName = page.locator('#username');
     const passwordTextbox = page.locator("[type='password']");
@@ -74,14 +75,14 @@ test('UI Controls', async({page})=>{
     await page.locator(".radiotextsty").last().click();
     await page.locator("#okayBtn").click();
     console.log(await page.locator(".radiotextsty").last().isChecked());
-    await expect( page.locator(".radiotextsty").last()).toBeChecked();
+    await expect(page.locator(".radiotextsty").last()).toBeChecked();
 
     await terms.click();
     await expect(terms).toBeChecked();
     await terms.uncheck();
     //await should be outside - where action is performed
     expect(await terms.isChecked()).toBeFalsy();
-    
+
 
     //Blinking link
     await expect(documentLink).toHaveAttribute("class", "blinkingText");
@@ -91,7 +92,7 @@ test('UI Controls', async({page})=>{
     await page.pause();
 });
 
-test('@Child page handling', async({browser})=>{
+test('@Child page handling', async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto("https://rahulshettyacademy.com/loginpagePractise");
@@ -100,25 +101,26 @@ test('@Child page handling', async({browser})=>{
     // const pagePromise = context.waitForEvent('page');
     // await documentLink.click();
     // const newPage = await pagePromise;
-    
+
 
     //both below steps should be fulfilled - use Promise.all()
     const [newPage] = await Promise.all(
         [
-    context.waitForEvent('page'),//listen for any new page pending, rejected, fulfilled
-    documentLink.click()
-
-    ])
+            context.waitForEvent('page'),//listen for any new page pending, rejected, fulfilled
+            documentLink.click()
+        ])
     //In above Promise, first line will be in pending status and in parallel second line will be executed, 
     // both of them will be executed simultaniously untill both of promises are fulfilled
     const text = await newPage.locator(".red").textContent();
     console.log(text);
     const arrayText = text?.split("@");
-    if(arrayText!= undefined) {
-    const domain = arrayText[1].split(" ")[0];
-    console.log(domain);
-    await page.locator('#username').fill(domain);
-    await page.pause();
-    console.log(await page.locator("#username").textContent());
+    if (arrayText) {
+        const domain = arrayText[1].split(" ")[0];
+        console.log(domain);
+        await page.locator('#username').fill(domain);
+        await page.pause();
+        console.log(await page.locator("#username").textContent());
+    } else {
+        throw new ValidationError("Element not found or has no text content");
     }
 });
